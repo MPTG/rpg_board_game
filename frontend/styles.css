@@ -1,0 +1,12 @@
+body {
+    background-color: #1A1818;
+}
+
+h1 {
+    color:#FAEBD7;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 500%;
+}
