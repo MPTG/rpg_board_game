@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPG Board Control</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js"></script>
 </head>
 <body>
     <h1>Statistics of players</h1>
-    <div>
-        <label>
-            Player's name
-            <input type="text", id="adress" placeholder="0x...">
-        </label>
-    </div>
+    <div class="input">
+        <input type="text" id="address" placeholder="Enter player address">
+        <button id="loadDataButton">Get data</button>
+        <div id="dataDisplay"></div>
+        <div id="status"></div>
+        <button id="resetViewedPlayers">Reset Viewed Players</button>
+        </div>
+
+    <script>
+        const backendUrl = 'http://localhost:5000'; // Define your backend URL
+    </script>
+    <script src="app.js"></script>
 </body>
 </html>
