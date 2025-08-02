@@ -1,5 +1,14 @@
 {
-    "player1": {"name": "Alice", "hp": 100},
-    "player2": {"name": "Bob", "hp": 100},
-    "player3": {"name": "Charlie", "hp": 100}
+    "player1": {
+        "name": "Alice",
+        "HP": 100,
+        "Strength": 10,
+        "Dexterity": 5,
+        "Constitution": 8,
+        "Intelligence": 12,
+        "Wisdom": 7,
+        "Charisma": 6
+    },
+    "player2": {"name": "Bob", "HP": 100},
+    "player3": {"name": "Charlie", "HP": 100}
 }
