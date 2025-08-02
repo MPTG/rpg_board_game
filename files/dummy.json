@@ -1,0 +1,5 @@
+{
+    "player1": {"name": "Alice", "hp": 100},
+    "player2": {"name": "Bob", "hp": 100},
+    "player3": {"name": "Charlie", "hp": 100}
+}
