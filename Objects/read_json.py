@@ -20,15 +20,14 @@ class ReadJson():
         return data
 
 
-class WriteJson:
-    def __init__(self, file_path, data):
+class WriteJson():
+    def __init__(self, file_path):
         if not file_path.endswith('.json'):
             raise ValueError("File path must end with '.json'")
         if not file_path:
             raise ValueError("File path cannot be empty")
         
         self.file_path = file_path
-        self.data = data
 
     def append_json(self, data):
         """
@@ -43,15 +42,15 @@ class WriteJson:
                 try:
                     all_data = json.load(file)
                 except json.JSONDecodeError:
-                    print(
-                        "Warning: JSON file is corrupted or empty."
-                        )
+                    print("Warning: JSON file is corrupted or empty. Overwriting.")
 
         all_data.update(data)
 
         with open(self.file_path, 'w', encoding='utf-8') as file:
             json.dump(all_data, file, indent=4, ensure_ascii=False)
     
+
+    @staticmethod
     def save_data_to_json(file_path, data):
         """
         Saves the provided data to a JSON file.

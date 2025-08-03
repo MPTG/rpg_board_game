@@ -22,6 +22,7 @@ class Player(ctk.CTkFrame):
         self.tab.pack(pady=10, padx=10)
         self.frames = []
         self.show_more_stats = None
+        self.stat_entries = {}
 
 
     def display_players_tabs(self):
@@ -95,7 +96,7 @@ class Player(ctk.CTkFrame):
         self.additional_info.grid(row=11, column=0, columnspan=3, padx=10, pady=10, sticky='nsew')
 
     def show_and_update_statistics(self, player_name, frame):
-        self.stat_entries = {}
+        self.stat_entries[player_name] = {}
         row = 0
         for stat, value in self.data[player_name]['statistics'].items():
             label = ctk.CTkLabel(
@@ -115,7 +116,7 @@ class Player(ctk.CTkFrame):
             entry_new_value.grid(row=row, column=2, padx=(0, 0), pady=(10, 0))
 
             # Save entry for later use
-            self.stat_entries[stat] = entry_new_value
+            self.stat_entries[player_name][stat] = entry_new_value
 
             confirm_button = ctk.CTkButton(
                 frame,
@@ -129,7 +130,7 @@ class Player(ctk.CTkFrame):
             row += 1
 
     def update_statistic(self, player_name):
-        for stat, entry in self.stat_entries.items():
+        for stat, entry in self.stat_entries[player_name].items():
             try:
                 new_value = int(entry.get())
                 self.data[player_name]['statistics'][stat] = new_value
@@ -137,7 +138,7 @@ class Player(ctk.CTkFrame):
                 print(f"Invalid value for {stat}: {entry.get()}")
 
         WriteJson.save_data_to_json(self.path_to_json, self.data)  # ← Save to JSON file
-
+        self.data = ReadJson(self.path_to_json).read_json()
         # Refresh the display
         self.frames[player_name].destroy()
         new_frame = ctk.CTkFrame(self.tab.tab(player_name))

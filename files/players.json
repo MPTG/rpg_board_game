@@ -11,12 +11,12 @@
         "speed": 10,
         "proficiency_bonus": 5,
         "statistics": {
-            "strength": 20,
-            "dexterity": 10,
-            "constitution": 5,
+            "strength": 15,
+            "dexterity": 20,
+            "constitution": 10,
             "intelligence": 10,
-            "wisdom": 4,
-            "charisma": 2
+            "wisdom": 15,
+            "charisma": 12
         },
         "skills": {
             "acrobatics": -3,
@@ -77,6 +77,46 @@
             "sleight_of_hand": 0,
             "stealth": 0,
             "survival": -3
+        }
+    },
+    "Grzegorz": {
+        "name": "Grzegorz",
+        "character_name": "Wodny Toiliet",
+        "character_level": "69",
+        "race": "Orc",
+        "class": "Warrior",
+        "armor_class": 19,
+        "hit_points": 100,
+        "initiative": 20,
+        "speed": 11,
+        "proficiency_bonus": 2,
+        "statistics": {
+            "strength": 20,
+            "dexterity": 20,
+            "constitution": 0,
+            "intelligence": 0,
+            "wisdom": 0,
+            "charisma": 0
+        },
+        "skills": {
+            "acrobatics": 5,
+            "animal_handling": -5,
+            "arcana": -5,
+            "athletics": 5,
+            "deception": -5,
+            "history": -5,
+            "insight": -5,
+            "intimidation": -5,
+            "investigation": -5,
+            "medicine": -5,
+            "nature": -5,
+            "perception": -5,
+            "performance": -5,
+            "persuasion": -5,
+            "religion": -5,
+            "sleight_of_hand": 5,
+            "stealth": 5,
+            "survival": -5
         }
     }
 }
