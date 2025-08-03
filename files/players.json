@@ -1,0 +1,82 @@
+{
+    "Maciek": {
+        "name": "Maciek",
+        "character_name": "Elseir",
+        "character_level": "5",
+        "race": "Elf",
+        "class": "Mage",
+        "armor_class": 14,
+        "hit_points": 20,
+        "initiative": 5,
+        "speed": 10,
+        "proficiency_bonus": 5,
+        "statistics": {
+            "strength": 20,
+            "dexterity": 10,
+            "constitution": 5,
+            "intelligence": 10,
+            "wisdom": 4,
+            "charisma": 2
+        },
+        "skills": {
+            "acrobatics": -3,
+            "animal_handling": 5,
+            "arcana": 5,
+            "athletics": 0,
+            "deception": 2,
+            "history": 5,
+            "insight": 5,
+            "intimidation": 2,
+            "investigation": 5,
+            "medicine": 5,
+            "nature": 5,
+            "perception": 5,
+            "performance": 2,
+            "persuasion": 2,
+            "religion": 5,
+            "sleight_of_hand": -3,
+            "stealth": -3,
+            "survival": 5
+        }
+    },
+    "Michalina": {
+        "name": "Michalina",
+        "character_name": "Elfroda",
+        "character_level": "10",
+        "race": "Orc",
+        "class": "Paladin",
+        "armor_class": 18,
+        "hit_points": 20,
+        "initiative": 5,
+        "speed": 10,
+        "proficiency_bonus": 2,
+        "statistics": {
+            "strength": 15,
+            "dexterity": 10,
+            "constitution": 5,
+            "intelligence": 10,
+            "wisdom": 4,
+            "charisma": 2
+        },
+        "skills": {
+            "acrobatics": 0,
+            "animal_handling": -3,
+            "arcana": 0,
+            "athletics": 2,
+            "deception": -4,
+            "history": 0,
+            "insight": -3,
+            "intimidation": -4,
+            "investigation": 0,
+            "medicine": -3,
+            "nature": 0,
+            "perception": -3,
+            "performance": -4,
+            "persuasion": -4,
+            "religion": 0,
+            "sleight_of_hand": 0,
+            "stealth": 0,
+            "survival": -3
+        }
+    }
+}

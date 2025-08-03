@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class ReadJson():
@@ -17,3 +18,45 @@ class ReadJson():
         with open(self.file_path, 'r', encoding='utf-8') as file:
             data = json.load(file)
         return data
+
+
+class WriteJson:
+    def __init__(self, file_path, data):
+        if not file_path.endswith('.json'):
+            raise ValueError("File path must end with '.json'")
+        if not file_path:
+            raise ValueError("File path cannot be empty")
+        
+        self.file_path = file_path
+        self.data = data
+
+    def append_json(self, data):
+        """
+        Appends or updates a single player's data in a JSON file.
+
+        :param data: Dictionary of format {player_name: player_data}
+        """
+        all_data = {}
+
+        if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
+            with open(self.file_path, 'r', encoding='utf-8') as file:
+                try:
+                    all_data = json.load(file)
+                except json.JSONDecodeError:
+                    print(
+                        "Warning: JSON file is corrupted or empty."
+                        )
+
+        all_data.update(data)
+
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            json.dump(all_data, file, indent=4, ensure_ascii=False)
+    
+    def save_data_to_json(file_path, data):
+        """
+        Saves the provided data to a JSON file.
+
+        :param data: Dictionary to be saved.
+        """
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file, indent=4)
