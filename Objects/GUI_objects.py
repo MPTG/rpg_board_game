@@ -21,12 +21,76 @@ class MapListWindow(ctk.CTkToplevel):
 
 
 class ShowMoreSkillsWindow(ctk.CTkToplevel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, player_name, player_data):
+        super().__init__()
         self.geometry("700x500")
+        self.title(f"More Skills - {player_name}")
+        self.player_name = player_name
+        self.player_data = player_data  # This includes 'skills' and 'statistics'
+        self.json_writer = WriteJson('files/players.json')
+        self.label = ctk.CTkLabel(self, text="More Skills", font=("Arial", 24, "bold"))
+        self.label.pack(pady=20)
 
-        self.label = ctk.CTkLabel(self, text="Show More Skills")
-        self.label.pack(pady=20, padx=20)
+        # Button to update skills
+        self.update_button = ctk.CTkButton(self, text="Update Skills", command=self.update_skills)
+        self.update_button.pack(pady=5)
+
+        # Scrollable Frame for skill display
+        self.scrollable_frame = ctk.CTkScrollableFrame(self)
+        self.scrollable_frame.pack(expand=True, fill="both", padx=20, pady=10)
+
+        # Store references to labels for easy updating
+        self.skill_labels = {}
+
+        # Initial display
+        self.display_skills()
+
+    def display_skills(self):
+        self.skill_labels.clear()
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+
+        col = 0
+        row = 0
+        for skill, value in self.player_data['skills'].items():
+            label = ctk.CTkLabel(
+                self.scrollable_frame,
+                text=f"{skill.capitalize()}: {value}",
+                anchor='w',
+                font=("Arial", 18)
+            )
+            label.grid(row=row, column=col, padx=10, pady=5, sticky='w')
+            self.skill_labels[skill] = label
+
+            row += 1
+            if row > 5:
+                row = 0
+                col += 1
+
+    def update_skills(self):
+        skills_to_statistics = {
+            "acrobatics": "dexterity", "animal_handling": "wisdom",
+            "arcana": "intelligence", "athletics": "strength",
+            "deception": "charisma", "history": "intelligence",
+            "insight": "wisdom", "intimidation": "charisma",
+            "investigation": "intelligence", "medicine": "wisdom",
+            "nature": "intelligence", "perception": "wisdom",
+            "performance": "charisma", "persuasion": "charisma",
+            "religion": "intelligence", "sleight_of_hand": "dexterity",
+            "stealth": "dexterity", "survival": "wisdom"
+        }
+
+        for skill, related_stat in skills_to_statistics.items():
+            stat_value = self.player_data["statistics"].get(related_stat, 10)
+            modifier = (stat_value - 10) // 2
+            self.player_data["skills"][skill] = modifier
+
+            # Update label in UI
+            if skill in self.skill_labels:
+                self.skill_labels[skill].configure(text=f"{skill.capitalize()}: {modifier}")
+                self.json_writer.append_json({
+                    self.player_name: self.player_data
+                    })
 
 
 class AddPlayer(ctk.CTkToplevel):

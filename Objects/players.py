@@ -24,7 +24,6 @@ class Player(ctk.CTkFrame):
         self.show_more_stats = None
         self.stat_entries = {}
 
-
     def display_players_tabs(self):
         self.frames = {}
 
@@ -67,17 +66,20 @@ class Player(ctk.CTkFrame):
 
             self.frames[player_name] = frame_stats
             
-            self.show_more_stats_button = ctk.CTkButton(
+            self.show_skills_button = ctk.CTkButton(
                 self.tab.tab(player_name),
                 text='Show More Skills',
-                command=self.show_stats
+                command=lambda name=player_name: self.show_skills(name)
             )
-            self.show_more_stats_button.grid(row=row, column=1, padx=10, pady=10, sticky='ew')
+            self.show_skills_button.grid(row=row, column=1, padx=10, pady=10, sticky='ew')
             self.add_additional_informations(self.tab.tab(player_name))
 
-    def show_stats(self):
+    def show_skills(self, player_name):
         if self.show_more_stats is None or not self.show_more_stats.winfo_exists():
-            self.show_more_stats = ShowMoreSkillsWindow(self)
+            self.show_more_stats = ShowMoreSkillsWindow(
+                player_name,
+                self.data[player_name]['skills']
+                )
             self.show_more_stats.focus()
         else:
             self.show_more_stats.focus()
@@ -145,3 +147,16 @@ class Player(ctk.CTkFrame):
         new_frame.grid(row=0, column=1, padx=(5, 10), pady=10)
         self.frames[player_name] = new_frame
         self.show_and_update_statistics(player_name, new_frame)
+    
+    def show_more_skills(self, player_name, frame):
+        self.stat_entries[player_name] = {}
+        row = 0
+        for stat, value in self.data[player_name]['skills'].items():
+            label = ctk.CTkLabel(
+                frame,
+                text=f"{stat.capitalize()}: {value}",
+                width=150,
+                anchor='w',
+                font=("Arial", 20, "italic"),
+            )
+            label.grid(row=row, column=1, padx=(0, 0), pady=(10, 0))
