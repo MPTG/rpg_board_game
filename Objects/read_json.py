@@ -7,17 +7,16 @@ class ReadJson():
         self.file_path = file_path
 
     def read_json(self):
-        """
-        Reads a JSON file and returns the data as a Python dictionary.
+        # If file doesn't exist or is empty, return empty dict
+        if not os.path.exists(self.file_path) or os.stat(self.file_path).st_size == 0:
+            return {}
 
-        :param file_path: Path to the JSON file.
-        :return: Dictionary containing the JSON data.
-        :raises FileNotFoundError: If the file does not exist.
-        :raises json.JSONDecodeError: If the file is not a valid JSON.
-        """
-        with open(self.file_path, 'r', encoding='utf-8') as file:
-            data = json.load(file)
-        return data
+        try:
+            with open(self.file_path, 'r') as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            # Corrupted file, return empty dict instead of crashing
+            return {}
 
 
 class WriteJson():

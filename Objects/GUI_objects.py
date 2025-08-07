@@ -87,7 +87,9 @@ class ShowMoreSkillsWindow(ctk.CTkToplevel):
 
             # Update label in UI
             if skill in self.skill_labels:
-                self.skill_labels[skill].configure(text=f"{skill.capitalize()}: {modifier}")
+                self.skill_labels[skill].configure(
+                    text=f"{skill.capitalize()}: {modifier}"
+                    )
                 self.json_writer.append_json({
                     self.player_name: self.player_data
                     })
@@ -224,8 +226,9 @@ class AddPlayer(ctk.CTkToplevel):
 
 
 class ShowMenuTab(ctk.CTkFrame):
-    def __init__(self, master=None):
+    def __init__(self, master=None, restart_app_function=None):
         super().__init__(master)
+        self.restart_app_function = restart_app_function
 
         self.menu_tab = ctk.CTkTabview(
             self,
@@ -269,6 +272,13 @@ class ShowMenuTab(ctk.CTkFrame):
             command=self.add_new_player
         )
         self.button_add_player.pack(side='top', pady=10, padx=10)
+
+        self.button_restart = ctk.CTkButton(
+            self.menu_tab.tab("Menu"),
+            text='Restart App',
+            command=self.restart_app_function
+        )
+        self.button_restart.pack(side='top', pady=10, padx=10)
 
     def open_players_list(self):
         if self.players_window is None or not self.players_window.winfo_exists():
